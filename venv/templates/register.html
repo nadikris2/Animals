@@ -1,0 +1,74 @@
+
+<h4 align = "center">
+    <strong>
+        Register
+    </strong>
+  </h4>
+  <img src="{{url_for('static', filename='img/selamatdatang.jpeg')}}" class="center" width="40px" height="200px" />
+  <hr>
+  {%include "error_message.html"%}
+    {% if current_user.is_anonymous %}
+  <form method="POST">
+  
+    {{ form.hidden_tag() }}
+    <p align="center">
+      <img src="{{url_for('static', filename='img/user.png')}}" class="center-user" />
+      {{ form.username.label }}<br>
+        {{ form.username(size=32) }}<br>
+        {% for error in form.username.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p align = "center">
+      <img src="{{url_for('static', filename='img/email.png')}}" class="center-user" />
+        {{ form.email.label }}<br>
+        {{ form.email(size=64) }}<br>
+        {% for error in form.email.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p align="center">
+      <img src="{{url_for('static', filename='img/role.png')}}" class="center-user" />
+        {{ form.role.label }}<br>
+        {{ form.role}}<br>
+        {% for error in form.role.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+  
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+  
+  <hr>
+  
+  <a href="/login">Login into existing account!</a>
+  {%endif%}
+  
+  <style>
+    button{
+        /*Change the width as much as you like, but make sure 
+        margin-left and margin-right + width = 100%*/
+        width:20%;
+        margin-left:40%;
+        margin-right:35%;
+    }
+    a {
+        text-align:center;
+        display:block;
+    }
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  height:40%;
+}
+
+.center-user {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 6%;
+  height: 15%;
+}
+    </style>
