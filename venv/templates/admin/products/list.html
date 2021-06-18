@@ -1,0 +1,79 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<!-- tampilan untuk crud dan melihat isi data yang sudah masuk ke database-->
+<body>
+<table class="table table-dark" id="Products">
+    <thead class="thead-dark">
+        <img src="{{url_for('static', filename='img/crud.png')}}" class="center"/>
+    <tr>
+        {% for header in headings %}
+        <th>{{ header }}</th>
+        {% endfor %}
+    </tr>
+        </thead>
+        {% for row in data %}
+            <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.barang }}</td>
+                <td>{{ row.harga }}</td>
+                <td>{{ row.jumlah}}</td>
+                <td>{{ row.user_id}}</td>
+                <td><img src="/static/image/{{ row.id }}.jpg" width="90" height="90"></td>
+                <td>
+                    <a href="/admin/products/update?id={{ row.id }}"><img src="{{url_for('static', filename='img/edit.png')}}" width="60" height="60"/></a></td>
+                    <td><a href="/admin/products/delete?id={{ row.id }}"><img src="{{url_for('static', filename='img/delete4.png')}}" width="40" height="40"/></a></td>
+            </tr>
+        {% endfor %}
+</table><br>
+<input type="button" onclick="generate()" value="Export To PDF" />  
+
+    <script type="text/javascript">  
+        function generate() {  
+            var doc = new jsPDF('p', 'pt', 'letter');  
+            var htmlstring = '';  
+            var tempVarToCheckPageHeight = 0;  
+            var pageHeight = 0;  
+            pageHeight = doc.internal.pageSize.height;  
+            specialElementHandlers = {  
+                // element with id of "bypass" - jQuery style selector  
+                '#bypassme': function(element, renderer) {  
+                    // true = "handled elsewhere, bypass text extraction"  
+                    return true  
+                }  
+            };  
+            margins = {  
+                top: 150,  
+                bottom: 60,  
+                left: 40,  
+                right: 40,  
+                width: 600  
+            };  
+            var y = 1000;  
+            doc.setLineWidth(2);  
+            doc.text(2000, y = y + 30, "Products");  
+            doc.autoTable({  
+                html: '#Products',  
+                startY: 70,  
+                theme: 'grid',  
+                
+                styles: {  
+                    minCellHeight: 40  
+                }  
+            })  
+            doc.save('Products.pdf');  
+        }  
+        </script>   
+{% endblock %}
+</body>
+<img src="{{url_for('static', filename='img/')}}" />
+
+<style>
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height:40%;
+}
+</style>
