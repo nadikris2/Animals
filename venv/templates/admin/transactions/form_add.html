@@ -1,0 +1,17 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<!-- tampilan untuk menambahkan data dari folder transaksi yang sudah dibagian sesuai sub bab masing2 -->
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="row form-group">
+            <div class="col-md-8">
+                <input class="form-control" name="products" type="text" placeholder="Product id">
+            </div>
+            <div class="col-md-4">
+                <input class="form-control col-md-4" name="products_qty" type="text" placeholder="Product quantity">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <img src="{{url_for('static', filename='img/')}}" />
+{% endblock %}
