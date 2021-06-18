@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>AniMall</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='assets/logos') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="site">
+    <div class="topnav">
+        <div class="search-line">
+            <i class="fa fa-paw" id="open-btn" onclick="openside()"></i>
+            <i class="fa fa-times" id="close-btn" onclick="closeside()"></i>
+            <a href="#" onclick="javascript:play()">
+                <audio id="audio" src="assets/sounds/bark.wav"></audio>
+                <picture>
+                    <source media="(min-width: 1050px)" srcset="{{url_for('static', filename='assets/logos/logo.png')}}">
+                    <img id="logo" src="{{url_for('static', filename='assets/logos/other_logo.png')}}" alt="site-logo" width="40px">
+                </picture>
+            </a>
+            <input type="text" class="search-form">
+            <span class="input-text" onclick="sorry()"><i class="fa fa-search"></i></span>
+        </div>
+        <div class="account-menu">
+            <ul>
+                {% if current_user.is_authenticated %}
+                <li><a href="/logout/" onclick="javascript:sorry()"><i class="fa fa-sign-out"></i>Log Out</a></li>
+                {%else%}
+                <li><a href="/register/" onclick="javascript:sorry()">Register</a></li>
+                <li><a href="/login/" onclick="javascript:sorry()">Login</a></li>
+                {%endif%}
+                <li><a href="/admin/products" onclick="javascript:sorry()">Admin Page</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <header>
+        <div class="side-menu" id="side-menu">
+            <ul>
+                <li>Dogs <i class="fa fa-caret-right"></i>
+                    <ul id="gettop">
+                        <li><a href="#food">Food</a></li>
+                        <li><a href="#toys">Accessories</a></li>
+                        <li><a href="#clothes">Clothes</a></li>
+                        <li><a href="#med">Medical</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="slideshow">
+            <div id="slideshow" class="carousel slide carousel-fade" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <picture>
+                            <source media="(min-width: 1050px)" srcset="{{url_for('static', filename='assets/low/birdboxyellow.jpg')}}" class="d-block w-100">
+                            <img src="{{url_for('static', filename='assets/high/birdboxyellow.jpg')}}" class="d-block w-100" alt="S1">
+                        </picture>
+                    </div>
+                    
+        </div>
+    </header>
+
+    <main>
+        <section class="categsecs">
+            <div class="container">
+                <div id="med"></div>
+                <div class="categ-title">
+                    <h2>Products</h2>
+                </div>
+                <div class="row">
+                    {% for row in data %}
+                    <div class="col-md-3">
+                        <div class="prod-top">
+                            <picture>
+                                <img src="/static/image/{{ row.id }}.jpg" width="90" height="90"></td>
+                            </picture>
+                            <div class="overlay-right">
+                                <button onclick="conf()" type="button" class="btn btn-secondary" title="Αγορά">
+                                <i class="fa fa-credit-card"></i>
+                            </button><br>
+                                <button onclick="sorry()" type="button" class="btn btn-secondary" title="Προσθήκη στο Καλάθι">
+                                <i class="fa fa-cart-plus"></i>
+                            </button>
+                            </div>
+                        </div>
+                        <div class="prod-bot text-center">
+                            <td>
+                                {{ row.barang }}
+                            </td>
+                            <br>
+                            <td>
+                                <a> Harga </a>{{ row.harga }}
+                            </td>
+                        </div>
+                    </div>
+                    <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+
+    <script src="script.js"></script>
+    </div>
+</body>
+
+</html>
