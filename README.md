@@ -8,7 +8,6 @@
  --------------------------------------------------------------------
  
  1. clone this repo git clone repo-url
- 2.  open directory and create virtualenv cd flask-pos virtualenv -p python3 env
- 3. install all package pip install -r requirements.txt
- 4. dump sql to your local machine
- 5. run project python run.py and visit localhost:5000
+ 2. install all package pip install -r requirements.txt
+ 3. dump sql to your local machine
+ 4. run project python run.py and visit localhost:5000
