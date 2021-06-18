@@ -1,0 +1,46 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+<!-- tampilan untuk crud dan melihat isi data yang sudah masuk ke database-->
+    <table class="table table-bordered table-striped">
+        <img src="{{url_for('static', filename='img/crud.png')}}" class="center"/>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>products</th>
+            <th>create on</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for transaction in transactions %}
+        <tr>
+            <td>
+                {{ transaction.id }}
+            </td>
+            <td>
+                <ul>
+                {% for transaction_product in transaction.transaction_products %}
+                    <li>{{ transaction_product.product.name }} = {{ transaction_product.product_qty }}</li>
+                {% endfor %}
+                </ul>
+            </td>
+            <td>
+                {{ transaction.create_on }}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        
+    </table>
+    <img src="{{url_for('static', filename='img/')}}" />
+{% endblock %}
+
+<style>
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height:40%;
+}
+</style>
