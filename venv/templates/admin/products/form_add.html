@@ -1,0 +1,25 @@
+{% extends 'admin/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<!-- tampilan untuk menambahkan data dari folder contact us yang sudah dibagian sesuai sub bab masing2 -->
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="barang">Nama Barang</label>
+            <input type="text" class="form-control" id="barang" name="barang" placeholder="Masukkan Nama barang" />
+        </div>
+        <div class="form-group">
+            <label for="harga">Harga</label>
+            <input name="harga" type="text" class="form-control" id="harga" placeholder="harga">
+        </div>
+        <div class="form-group">
+            <label for="jumlah">Jumlah Stock</label>
+            <input name="jumlah" type="text" class="form-control" id="jumlah" placeholder="jumlah" value = "1" min="1" step = "1">
+        </div>
+        <div class="form-group">
+            <label for="foto">image</label>
+            Pilih file: <input type="file" name="foto" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
+<img src="{{url_for('static', filename='img/')}}" />
